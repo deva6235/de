@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete All Companies</title>
+    <style>
+   
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 3em;
+            margin-bottom: 1em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        button {
+            background-color: #ff4c4c;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background-color: #e73827;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(231, 56, 39, 0.5);
+        }
+
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 10px 20px rgba(231, 56, 39, 0.5);
+        }
+
+        form {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2em;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+    <script>
+        function confirmDelete(event) {
+            if (!confirm("Are you sure you want to delete all company records? This action cannot be undone.")) {
+                event.preventDefault();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <h1>Are you sure you want to delete all company records?</h1>
+        <form method="POST" onsubmit="confirmDelete(event)">
+            {% csrf_token %}
+            <button type="submit">Delete All Companies</button>
+        </form>
+    </div>
+</body>
+</html>

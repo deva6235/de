@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submitted Details</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: #fff;
+        }
+        .box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            width: 450px;
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            animation: fadeIn 1s ease-in-out;
+        }
+        h4 {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #fff;
+        }
+        .stamp {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: url('stamp.png') no-repeat;
+            width: 100px;
+            height: 100px;
+            opacity: 0.7;
+        }
+        .button-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .button {
+            background-color: #007bff;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        @media (max-width: 600px) {
+            .box {
+                width: 90%;
+                padding: 10px;
+            }
+            h4 {
+                font-size: 14px;
+            }
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="box" id="content">
+            <div class="stamp"></div>
+            <h4 id="details"><b><i>FORM TM-48<br>THE TRADEMARKS ACT, 1999<br>FORM OF AUTHORISATION OF AN AGENT at<br>[Sec. 145; Rule 21]</i></b><br><br>
+                <b><I><span id="company-details">,Represented by Its ,</span>,do hereby authorize Advocate. Mr. BALACHANDRAN Carp a PALAKKADAN KRISHNAN, Room no. 19/411, 1<sup>st</sup> Floor Anna Residency, South Chalakudy, Thrissur, Kerala, Pin no: 680 307. Attorney code 18090, to act as our agent for the purpose of filing and prosecuting applications for registration of trademarks in all classes, oppositions, Renewals, Restorations, Recordals of Assignments, Licensing, Recordal of Registered users,
+                </I></h4>
+        </div>
+        <div class="button-container">
+            <button class="button" onclick="downloadDoc()">Download as DOCX</button>
+        </div>
+    </div>
+    <script>
+        // Function to get query parameters from the URL
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                name: params.get('name'),
+                address: params.get('address'),
+                c_name: params.get('c_name'),
+                gender: params.get('gender'),
+                director: params.get('director')
+            };
+        }
+
+        // Function to populate the form with query parameters
+        function populateForm() {
+            const params = getQueryParams();
+            const companyDetails = `${params.c_name}, Represented by Its ${params.director} ${params.gender} ${params.name}, ${params.address}`;
+            document.getElementById('company-details').innerText = companyDetails;
+        }
+
+        // Populate the form on page load
+        window.onload = populateForm;
+
+        // Function to download the content as a DOCX file
+        function downloadDoc() {
+            var content = document.getElementById('content').innerHTML;
+            var header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' " +
+                         "xmlns:w='urn:schemas-microsoft-com:office:word' " +
+                         "xmlns='http://www.w3.org/TR/REC-html40'>" +
+                         "<head><meta charset='utf-8'><title>Document</title></head><body>";
+            var footer = "</body></html>";
+            var sourceHTML = header + content + footer;
+
+            var source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(sourceHTML);
+            var fileDownload = document.createElement("a");
+            document.body.appendChild(fileDownload);
+            fileDownload.href = source;
+            fileDownload.download = 'document.doc';
+            fileDownload.click();
+            document.body.removeChild(fileDownload);
+        }
+    </script>
+</body>
+</html>

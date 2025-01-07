@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Company Details</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+            text-align: center;
+            animation: gradientBg 15s ease infinite;
+        }
+        @keyframes gradientBg {
+            0% { background: linear-gradient(135deg, #6a11cb, #2575fc); }
+            50% { background: linear-gradient(135deg, #ff7e5f, #feb47b); }
+            100% { background: linear-gradient(135deg, #6a11cb, #2575fc); }
+        }
+        h1 {
+            font-size: 48px;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 2s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        form {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            animation: slideIn 1s ease-out;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        form::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.2));
+            transform: rotate(30deg);
+            animation: formBg 5s linear infinite;
+        }
+        @keyframes formBg {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        form .content {
+            position: relative;
+            z-index: 1;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            animation: fadeIn 1.5s ease-in;
+        }
+        input[type="text"], select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            animation: fadeIn 2s ease-in;
+        }
+        input[type="text"]:focus, select:focus {
+            border-color: #6a11cb;
+            box-shadow: 0 0 8px rgba(106, 17, 203, 0.5);
+            outline: none;
+        }
+        select option {
+            background-color: #fff;
+            color: #333;
+            padding: 10px;
+        }
+        select option:hover {
+            background-color: #6a11cb;
+            color: #fff;
+        }
+        button, .print-button {
+            background-color: #6a11cb;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            animation: fadeIn 2.5s ease-in;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+        button:hover, .print-button:hover {
+            background-color: #2575fc;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(39, 117, 252, 0.5);
+        }
+        button:active, .print-button:active {
+            transform: translateY(0);
+            box-shadow: 0 5px 10px rgba(39, 117, 252, 0.5);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Enter Your Details Here</h1><br>
+    <div>
+        <form id="" method="post">
+            <div class="content">
+                {% csrf_token %}
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Name" required><br><br>
+
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address" placeholder="Address" required><br><br>
+
+                <label for="c_name">Company Name</label>
+                <input type="text" id="c_name" name="c_name" placeholder="Company Name" required><br><br>
+
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender" required>
+                    <option value="Mr">Mr</option>
+                    <option value="Mrs">Mrs</option>
+                </select><br><br>
+
+                <label for="director">Director</label>
+                <select id="director" name="director" required>
+                    <option value="Director">Director</option>
+                    <option value="Partner">Partner</option>
+                    <option value="Prosecutor">Prosecutor</option>
+                </select><br><br>
+
+                <button type="submit">Submit</button>
+                <button onclick="triggerDownload()">PDF</button>
+            </div>
+        </form>        
+    </div>
+</div>
+    <script>
+        function triggerDownload() {
+            // Assuming the original page is open in another window or tab
+            const originalWindow = window.open('submit_details/', '_blank');
+
+            // Wait for the original page to load and then trigger the download
+            originalWindow.onload = function() {
+                originalWindow.downloadPDF();
+            };
+        }
+    </script>
+</body>
+</html>

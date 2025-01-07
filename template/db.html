@@ -1,0 +1,68 @@
+<!-- myapp/templates/company_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company List</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        table {
+            width: 80%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background-color: #fff;
+            color: #333;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #6a11cb;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Company List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Company Name</th>
+                <th>Gender</th>
+                <th>Director</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for company in companies %}
+                <tr>
+                    <td>{{ company.name }}</td>
+                    <td>{{ company.address }}</td>
+                    <td>{{ company.c_name }}</td>
+                    <td>{{ company.gender }}</td>
+                    <td>{{ company.director }}</td>
+                    <td>{{ company.date }}</td>
+                    <td><a href="{% url 'form' %}?name={{ company.name }}&address={{ company.address }}&c_name={{ company.c_name }}&gender={{ company.gender }}&director={{ company.director }}">View Details</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
